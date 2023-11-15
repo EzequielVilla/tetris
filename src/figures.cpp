@@ -72,6 +72,7 @@ public:
 			break;
 		}
 		this->position = 1;
+
 		//createSquare(); 
 		//createT(); 
 		//createL(); 
@@ -87,7 +88,7 @@ public:
 	}
 	bool** rotate(FiguresType figure, RotateDirection rotate_direction) {
 		
-		// Devolver la forma que va a tener yyyy despues grid tiene que borrar y reemplazar la figura.
+
 		switch (figure)
 		{
 		case SQUARE:

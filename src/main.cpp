@@ -3,7 +3,7 @@
 #include <ostream>
 #include "figures.cpp"
 #include "main.h"
-//#include "./game.cpp"
+
 // x=0 its roof y x = mx_size its floor.
 struct Position {
 	int x;
@@ -66,7 +66,6 @@ public:
 				}
 			}
 		}
-		//this->m_figure_type = figure.
 	}
 	Collision moveFigure(Inputs letter) {
 		Collision collision = collisionChecker(letter);
@@ -160,8 +159,6 @@ private:
 					collision.border = true;
 					break;
 				}
-				/*bool border_figure = this->getCollisionBorderFigure(position);
-				collision.border = border_figure;*/
 				bool isHimself = getItsThisFigure(position);
 				if (!isHimself) {
 					bool next_value = myGrid[position.x][position.y];
@@ -173,13 +170,12 @@ private:
 			}
 			break;
 		case ROTATE:
-			// Enviar a la clase figura como son los cambios de posiciones dependiendo de la figura que envio, es decir, cuanto en X Y tiene que cambiar, que posiciones pasar a 0 y cuales a 1 de 
-			// los que le envio. Pero para eso tengo que saber el tipo y no tengo ese dato. Al menos que el figure tenga incluido no solo un bool** sino que ademas tenga un enum
-			// del tipo figura para que puedas saber si es un cuadrado, L , T , I. 
-			// Cada cambio deberia ser algo ya guardado, como un array, porque puede girar a la izq o a la derecha. Entonces pasaria de rotation[0] a rotation[1] o rotation[3] (de 0 tiene que pasar a 3)
-			// Y ademas tiene que saber, en ese enum, no solo el tipo, sino que tambien debe conservarse el valor de que en posicion de rotacion esta. Entonces debe guardarse en una variable de la clase
-			// En realidad la instancia misma podria tener un getter setter y no devolver un struct con tanta info. sino que sea Figure f -> f.rotate() y la misma figura, instancia,
-			// va a tener todos los datos guardado dentro.
+			// I have the positions vector and must send to the respective figure to which side must rotate and he will do the changes in the vector
+			// It doesnt watch if in the middle of the rotation is another figure, only check it at when the new figure is returned
+			// and looks if there is some type of collision
+			// The idea is to send the vector and the figure changes the values +1 or -1 (depends on the figure)
+
+			
 			std::cout << "NOT IMPLEMENTED YET " << std::endl;
 			break;
 		default:
@@ -187,6 +183,8 @@ private:
 		}
 		return collision;
 	}
+	// This is some idea for next refactor, to do a common collision border figure.
+
 	//bool getCollisionBorderFigure(Position position) {
 	//	bool isHimself = getItsThisFigure(position);
 	//	if (!isHimself) {
